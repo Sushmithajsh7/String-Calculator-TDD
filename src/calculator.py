@@ -1,7 +1,12 @@
+def add(numbers: str) -> int:
+    sum = 0
 
-def add(numbers:str) -> str:
     if numbers == "":
-        return 0
+        return sum
 
-    pass
+    number_list = map(int, numbers.split(","))
 
+    for number in number_list:
+        sum += number
+
+    return sum
