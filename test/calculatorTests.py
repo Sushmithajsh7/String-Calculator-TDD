@@ -15,3 +15,7 @@ class testStringCalculator(unittest.TestCase):
     # test case to consider new line character between numbers instead of comma
     def test_newLine(self):
         self.assertEqual(add("1\n2,3"), 6)
+
+    # different delimiters
+    def test_differentDelimiters(self):
+        self.assertEqual(add("//;\n1;2"), 3)
