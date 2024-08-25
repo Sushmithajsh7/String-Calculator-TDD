@@ -26,6 +26,10 @@ class testStringCalculator(unittest.TestCase):
             add("//;\n-1;-2;-6;9")
         self.assertEqual(str(context.exception), "negative numbers not allowed [-1, -2, -6]")
 
+    #Numbers bigger than 1000
+    def test_biggerNumbers(self):
+        self.assertEqual(add("2,1001"), 2)
+
 
 
 
