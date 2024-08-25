@@ -4,6 +4,7 @@ import re
 def add(numbers: str) -> int:
     result = 0
     delimiter = ','
+    negative_list = []
 
     if numbers == "":
         return result
@@ -16,6 +17,15 @@ def add(numbers: str) -> int:
     number_list = map(int, [char for char in re.split(regex, numbers) if char])
 
     for number in number_list:
+        if number < 0:
+            negative_list.append(number)
         result += number
 
+    if negative_list:
+        raise ValueError(f"negative numbers not allowed {negative_list}")
+
     return result
+
+
+
+

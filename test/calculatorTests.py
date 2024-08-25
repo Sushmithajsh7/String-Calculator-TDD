@@ -19,3 +19,13 @@ class testStringCalculator(unittest.TestCase):
     # different delimiters
     def test_differentDelimiters(self):
         self.assertEqual(add("//;\n1;2"), 3)
+
+    #Negative number as an input
+    def test_negativeInput(self):
+        with self.assertRaises(ValueError) as context:
+            add("//;\n-1;-2;-6;9")
+        self.assertEqual(str(context.exception), "negative numbers not allowed [-1, -2, -6]")
+
+
+
+
