@@ -9,20 +9,23 @@ def add(numbers: str) -> int:
     if numbers == "":
         return result
 
-    pattern_delimiter = r"^//(?:\[(.*?)\]|(.*))\n(.*)"
-    match = re.match(pattern_delimiter, numbers)
-    if match:
-        lengthy_delimiter = match.group(1)
-        single_delimiter = match.group(2)
+    pattern_delimiter = re.compile(r'\[(.*?)\]')
+    matches = pattern_delimiter.findall(numbers)
 
-        if lengthy_delimiter:
-            delimiter = lengthy_delimiter
-        elif single_delimiter:
-            delimiter = single_delimiter
+    # For multiple delimiters
+    if matches:
+        for match in  matches:
+            delimiter = delimiter + '|' + re.escape(match)
+        pattern_replace =  re.compile(r'//\[(.*?)\]\n')
+        numbers = pattern_replace.sub('', numbers)
+    #For single delimiter
+    else:
+        if numbers.startswith("//"):
+            delimiter = re.escape(numbers[2])
+            numbers = numbers.replace(numbers[0:3], "")
 
-        numbers = match.group(3)
-
-    regex = re.escape(delimiter) + r'|\n'
+    regex = delimiter + r'|\n'
+    xx = re.split(regex, numbers)
     number_list = map(int, [char for char in re.split(regex, numbers) if char])
 
     for number in number_list:
