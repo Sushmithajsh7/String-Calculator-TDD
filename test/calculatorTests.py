@@ -16,7 +16,7 @@ class testStringCalculator(unittest.TestCase):
     def test_newLine(self):
         self.assertEqual(add("1\n2,3"), 6)
 
-    #test case to handle different delimiters
+    # test case to handle different delimiters
     def test_differentDelimiters(self):
         self.assertEqual(add("//;\n1;2"), 3)
 
@@ -26,16 +26,21 @@ class testStringCalculator(unittest.TestCase):
             add("//;\n-1;-2;-6;9")
         self.assertEqual(str(context.exception), "negative numbers not allowed [-1, -2, -6]")
 
-    #test case to handle numbers bigger than 1000
+    # test case to handle numbers bigger than 1000
     def test_biggerNumbers(self):
         self.assertEqual(add("2,1001"), 2)
 
-    #test case to handle delimiters of any length
+    # test case to handle delimiters of any length
     def test_lengthierDelimiter(self):
         self.assertEqual(add("//[***]\n1***2***3"), 6)
 
+    # test case to handle multiple delimiters
     def test_multipleDelimiters(self):
         self.assertEqual(add("//[*][%]\n1*2%3"), 6)
+
+    # test case to handle multiple delimiters of any length
+    def test_multipleLengthyDelimiters(self):
+        self.assertEqual(add("//[***][%%%][;;;]\n1***2%%%3;;;5***1002"), 11)
 
 
 
